@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ফর্মবন্ধু চ্যাটবট</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="drag-drop.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.min.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <div class="header-icons">
+                <i class="fas fa-home home-icon" title="Home" onclick="window.location.href='index.html'"></i>
+                <i class="fas fa-bars history-icon" id="historyIcon" title="Chat History"></i>
+                <i class="fas fa-pen-to-square new-chat-icon" id="newChatIcon" title="New Chat"></i>
+            </div>
+            <div class="header-brand">
+                <span class="brand-logo">ফর্মবন্ধু</span>
+                <span class="dynamic-text"></span>
+            </div>
+            <div class="header-right-icons">
+                <i class="fas fa-video video-icon" id="videoIcon" title="টিউটোরিয়াল ভিডিও"></i>
+                <i class="fas fa-cog settings-icon" id="settingsIcon" title="সেটিংস" onclick="window.location.href='settings.html'"></i>
+                <i class="fas fa-user-cog account-icon" title="অ্যাকাউন্ট সেটিংস" onclick="window.location.href='account.html'"></i>
+            </div>
+        </div>
+        <div class="sub-header">
+            <div class="sub-header-left">আবেদন</div>
+            <div class="sub-header-right">প্রশ্ন জিজ্ঞাসা</div>
+        </div>
+        <div class="split-chat">
+            <div class="chat-column left-column">
+                <div class="welcome-message" id="welcomeMessage">
+                    <h2>আবেদন করতে ক্লিক করুন?</h2>
+                    <div class="welcome-buttons">
+                        <button class="welcome-btn" data-genre="এনআইডি আবেদন"><i class="fas fa-id-card"></i> এনআইডি আবেদন</button>
+                        <button class="welcome-btn" data-genre="পাসপোর্ট আবেদন"><i class="fas fa-passport"></i> পাসপোর্ট আবেদন</button>
+                        <button class="welcome-btn" data-genre="কোম্পানি রেজিস্ট্রেশন"><i class="fas fa-building"></i> কোম্পানি রেজিস্ট্রেশন</button>
+                        <button id="moreOptionsBtn"><i class="fas fa-ellipsis-h"></i> আরও </button>
+                    </div>
+                </div>
+                <div class="messages" id="messages">
+                    <!-- ইউজার/বট মেসেজ এখানে ডাইনামিক্যালি যোগ হবে -->
+                </div>
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <div class="preview-container" id="previewContainer">
+                            <img id="previewImage" class="preview-image" src="" alt="Image Preview">
+                        </div>
+                        <textarea id="userInput" placeholder="আপনার বার্তা লিখুন..."></textarea>
+                        <input type="file" id="fileInput" style="display: none;" accept="image/png, image/jpeg">
+                        <div class="button-container">
+                            <button id="uploadBtn" title="Upload Image"><i class="fas fa-paperclip"></i></button>
+                            <button id="sendBtn" title="Send Message"><i class="fas fa-arrow-up"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="chat-column right-column">
+                <div class="welcome-message" id="welcomeMessage-right">
+                    <h2>আবেদন সম্পর্কিত প্রশ্ন-জিজ্ঞাসা!</h2>
+                    <div class="welcome-buttons">
+                        <button class="welcome-btn" data-genre="এনআইডি আবেদন"><i class="fas fa-id-card"></i> এনআইডি আবেদন</button>
+                        <button class="welcome-btn" data-genre="পাসপোর্ট আবেদন"><i class="fas fa-passport"></i> পাসপোর্ট আবেদন</button>
+                        <button class="welcome-btn" data-genre="কোম্পানি রেজিস্ট্রেশন"><i class="fas fa-building"></i> কোম্পানি রেজিস্ট্রেশন</button>
+                        <button id="moreOptionsBtn-right"><i class="fas fa-ellipsis-h"></i> আরও </button>
+                    </div>
+                </div>
+                <div class="messages" id="messages-right">
+                    <!-- ইউজার/বট মেসেজ এখানে ডাইনামিক্যালি যোগ হবে -->
+                </div>
+                <div class="input-area">
+                    <div class="input-wrapper">
+                        <div class="preview-container" id="previewContainer-right">
+                            <img id="previewImage-right" class="preview-image" src="" alt="Image Preview">
+                        </div>
+                        <textarea id="userInput-right" placeholder="আপনার প্রশ্ন লিখুন..."></textarea>
+                        <input type="file" id="fileInput-right" style="display: none;" accept="image/png, image/jpeg">
+                        <div class="button-container">
+                            <button id="uploadBtn-right" title="Upload Image"><i class="fas fa-paperclip"></i></button>
+                            <button id="sendBtn-right" title="Send Message"><i class="fas fa-arrow-up"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-history sidebar-icon"></i>
+                <i class="fas fa-times close-sidebar" id="closeSidebar"></i>
+            </div>
+            <input type="text" class="search-input" id="searchInput" placeholder="চ্যাট অনুসন্ধান করুন...">
+            <div class="history-list" id="historyList">
+                <!-- ডাইনামিক চ্যাট ইতিহাস এখানে যোগ হবে -->
+            </div>
+        </div>
+        <div class="modal" id="deleteModal">
+            <div class="modal-content">
+                <p>আপনি কি এই চ্যাটটি মুছতে চান?</p>
+                <div class="modal-buttons">
+                    <button class="cancel" id="cancelDelete">বাতিল</button>
+                    <button class="confirm" id="confirmDelete">মুছুন</button>
+                </div>
+            </div>
+        </div>
+        <div class="rename-modal" id="renameModal">
+            <div class="rename-modal-content">
+                <h3>চ্যাটের নাম পরিবর্তন করুন</h3>
+                <input type="text" id="renameInput" placeholder="নতুন নাম লিখুন...">
+                <div class="rename-modal-buttons">
+                    <button class="cancel" id="cancelRename">বাতিল</button>
+                    <button class="save" id="saveRename">সংরক্ষণ</button>
+                </div>
+            </div>
+        </div>
+        <div class="genres-modal" id="genresModal">
+            <div class="genres-modal-content">
+                <h3><i class="fas fa-list-check"></i> সকল সেবা</h3>
+                <div class="genres-list" id="genresList"></div>
+                <div class="genres-modal-buttons">
+                    <button class="cancel" id="closeGenresModal">বন্ধ করুন</button>
+                </div>
+            </div>
+        </div>
+        <div id="genres2Modal" class="modal">
+            <div class="modal-content slide-in">
+                <span id="closeGenres2Modal" class="close">&times;</span>
+                <h2><i class="fas fa-list-check"></i> জনরা 2</h2>
+                <div id="genres2List"></div>
+                <div class="genres-modal-buttons">
+                    <button class="cancel" id="closeGenres2ModalBtn">বন্ধ করুন</button>
+                </div>
+            </div>
+        </div>
+        <div class="image-review-modal" id="imageReviewModal">
+            <div class="image-review-content">
+                <img class="review-image" id="reviewImage" src="" alt="Review Image">
+                <button class="delete-image-btn" id="deleteImageBtn"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+        <div class="edit-modal" id="editModal">
+            <div class="edit-modal-content">
+                <div class="edit-canvas-container">
+                    <canvas id="editCanvas"></canvas>
+                </div>
+                <div class="edit-controls">
+                    <div>
+                        <label for="cropX">Crop X:</label>
+                        <input type="range" id="cropX" min="0" max="1000" value="0">
+                    </div>
+                    <div>
+                        <label for="cropY">Crop Y:</label>
+                        <input type="range" id="cropY" min="0" max="1000" value="0">
+                    </div>
+                    <div>
+                        <label for="cropWidth">Crop Width:</label>
+                        <input type="range" id="cropWidth" min="10" max="1000" value="100">
+                    </div>
+                    <div>
+                        <label for="cropHeight">Crop Height:</label>
+                        <input type="range" id="cropHeight" min="10" max="1000" value="100">
+                    </div>
+                    <div>
+                        <label for="brightness">Brightness:</label>
+                        <input type="range" id="brightness" min="0" max="200" value="100">
+                    </div>
+                    <div>
+                        <label for="contrast">Contrast:</label>
+                        <input type="range" id="contrast" min="0" max="200" value="100">
+                    </div>
+                    <div>
+                        <label for="bgColor">Background Color:</label>
+                        <select id="bgColor">
+                            <option value="#ffffff">White</option>
+                            <option value="#000000">Black</option>
+                            <option value="#808080">Gray</option>
+                        </select>
+                    </div>
+                    <div class="edit-buttons">
+                        <button class="cancel" id="cancelEdit">বাতিল</button>
+                        <button class="apply" id="editApplyBtn">পরিবর্তন প্রয়োগ করুন</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <div class="video-modal" id="videoModal">
+    <div class="video-modal-content">
+        <video controls>
+            <source src="videos/মাত্র ১ দিনে নতুন ভোটার হওয়া যাবে _ How to Apply for New NID Card 2025.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-modal-buttons">
+            <button class="close-video" id="closeVideoModal">বন্ধ করুন</button>
+        </div>
+    </div>
+</div>
+    </div>
+    <script src="chat.js"></script>
+</body>
+</html>
