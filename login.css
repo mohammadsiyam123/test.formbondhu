@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tiro Bangla', 'Segoe UI', sans-serif;
+    background: #F3F4F6;
+    color: #333;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.brand-header {
+    background: linear-gradient(90deg, #1E3A8A, #10B981);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.brand-header h1 {
+    font-size: 32px;
+    color: #FFF;
+    font-weight: 700;
+    margin: 0;
+}
+
+.auth-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1E3A8A, #10B981);
+    padding: 20px;
+}
+
+.auth-box {
+    background: #FFF;
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: 20px 0;
+}
+
+.auth-box h2 {
+    font-size: 28px;
+    color: #1E3A8A;
+    margin-bottom: 30px;
+    font-weight: 700;
+    display: none; /* Hidden since header is added */
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 18px;
+    color: #333;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    font-size: 18px;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-group input:focus {
+    border: 1px solid #10B981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #10B981, #1E3A8A);
+    color: #FFF;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: 'Tiro Bangla', serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.auth-btn:hover {
+    background: linear-gradient(135deg, #059669, #1E40AF);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-login {
+    margin: 20px 0;
+}
+
+.social-login p {
+    font-size: 16px;
+    color: #6B7280;
+    margin-bottom: 15px;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-family: 'Tiro Bangla', serif;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.google-btn {
+    background: #FFF;
+    border: 1px solid #D1D5DB;
+    color: #333;
+}
+
+.google-btn:hover {
+    background: #F3F4F6;
+}
+
+.facebook-btn {
+    background: #3B5998;
+    color: #FFF;
+}
+
+.facebook-btn:hover {
+    background: #2F477A;
+}
+
+.auth-link {
+    font-size: 16px;
+    color: #6B7280;
+}
+
+.auth-link a {
+    color: #10B981;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: #EF4444;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.success-message {
+    color: #10B981;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+    .brand-header h1 {
+        font-size: 36px;
+    }
+    .auth-box {
+        max-width: 800px;
+        padding: 50px;
+    }
+    .input-group label {
+        font-size: 20px;
+    }
+    .input-group input {
+        padding: 16px;
+        font-size: 20px;
+    }
+    .auth-btn, .social-btn {
+        padding: 16px;
+        font-size: 20px;
+    }
+    .social-login p {
+        font-size: 18px;
+    }
+    .auth-link {
+        font-size: 18px;
+    }
+    .error-message, .success-message {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .brand-header h1 {
+        font-size: 28px;
+    }
+    .auth-box {
+        max-width: 400px;
+        padding: 30px;
+    }
+    .input-group label {
+        font-size: 16px;
+    }
+    .input-group input {
+        padding: 12px;
+        font-size: 16px;
+    }
+    .auth-btn, .social-btn {
+        padding: 12px;
+        font-size: 16px;
+    }
+    .social-login p {
+        font-size: 14px;
+    }
+    .auth-link {
+        font-size: 14px;
+    }
+    .error-message, .success-message {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-header h1 {
+        font-size: 24px;
+    }
+    .auth-box {
+        max-width: 320px;
+        padding: 20px;
+    }
+    .input-group label {
+        font-size: 14px;
+    }
+    .input-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .auth-btn, .social-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+    .social-login p {
+        font-size: 12px;
+    }
+    .auth-link {
+        font-size: 12px;
+    }
+    .error-message, .success-message {
+        font-size: 12px;
+    }
+}
