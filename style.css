@@ -787,8 +787,8 @@ body {
     background: #1E3A8A !important;
     color: #fff !important;
     font-size: 16px;
-    /* ব্যাকগ্রাউন্ড ইমেজ যোগ করতে চাইলে নিচের লাইনটি ব্যবহার করুন */
-    /* background-image: url('/path/to/your/image.png') !important; */
+    /* ব্যাকগ্রাউন্ড ইমেজ যোগ করতে চাইলে নিচের লাইনগুলোর কমেন্ট সরান */
+    /* background-image: url('/images/send-icon.png') !important; */
     /* background-size: cover; */
     /* background-position: center; */
 }
@@ -801,8 +801,7 @@ body {
 #sendBtn-right:hover {
     background: #3B82F6 !important;
     transform: scale(1.1) !important;
-    /* ব্যাকগ্রাউন্ড ইমেজ হোভারে পরিবর্তন করতে চাইলে নিচের লাইনটি ব্যবহার করুন */
-    /* background-image: url('/path/to/hover-image.png') !important; */
+    /* background-image: url('/images/send-icon-hover.png') !important; */
 }
 
 #sendBtn-right:active {
@@ -879,15 +878,14 @@ body {
     }
     #sendBtn-right {
         background: #1E3A8A !important;
-        /* ব্যাকগ্রাউন্ড ইমেজ যোগ করতে চাইলে নিচের লাইনটি ব্যবহার করুন */
-        /* background-image: url('/path/to/your/image.png') !important; */
+        /* background-image: url('/images/send-icon.png') !important; */
         /* background-size: cover; */
         /* background-position: center; */
     }
     #sendBtn-right:hover {
         background: #3B82F6 !important;
         transform: scale(1.1) !important;
-        /* background-image: url('/path/to/hover-image.png') !important; */
+        /* background-image: url('/images/send-icon-hover.png') !important; */
     }
     #sendBtn-right:active {
         background: #3B82F6 !important;
@@ -921,15 +919,14 @@ body {
     }
     #sendBtn-right {
         background: #1E3A8A !important;
-        /* ব্যাকগ্রাউন্ড ইমেজ যোগ করতে চাইলে নিচের লাইনটি ব্যবহার করুন */
-        /* background-image: url('/path/to/your/image.png') !important; */
+        /* background-image: url('/images/send-icon.png') !important; */
         /* background-size: cover; */
         /* background-position: center; */
     }
     #sendBtn-right:hover {
         background: #3B82F6 !important;
         transform: scale(1.1) !important;
-        /* background-image: url('/path/to/hover-image.png') !important; */
+        /* background-image: url('/images/send-icon-hover.png') !important; */
     }
     #sendBtn-right:active {
         background: #3B82F6 !important;
@@ -2114,5 +2111,6 @@ body {
            font-size: 10px;
        }
    }
+
 
 
