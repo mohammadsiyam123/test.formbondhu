@@ -762,14 +762,7 @@ body {
     outline: none;
 }
 
-#sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
-    border: none;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background 0.3s ease, transform 0.2s ease;
-}
+
 
 #sendBtn {
     width: 35px;
@@ -788,9 +781,6 @@ body {
     color: #fff !important;
     font-size: 16px;
     /* ব্যাকগ্রাউন্ড ইমেজ যোগ করতে চাইলে নিচের লাইনগুলোর কমেন্ট সরান */
-    /* background-image: url('/images/send-icon.png') !important; */
-    /* background-size: cover; */
-    /* background-position: center; */
 }
 
 #sendBtn:hover {
@@ -809,26 +799,6 @@ body {
     transform: scale(1.1) !important;
 }
 
-#uploadBtn, #uploadBtn-right {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: #1E3A8A;
-    color: #fff;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-left: 10px;
-}
-
-#uploadBtn i, #uploadBtn-right i {
-    font-size: 16px;
-}
-
-#uploadBtn:hover, #uploadBtn-right:hover {
-    background: #3B82F6;
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-}
 
 .button-container {
     display: flex;
@@ -873,9 +843,7 @@ body {
         height: 30px;
         font-size: 14px;
     }
-    #uploadBtn i, #uploadBtn-right i {
-        font-size: 14px;
-    }
+  
     #sendBtn-right {
         background: #1E3A8A !important;
         /* background-image: url('/images/send-icon.png') !important; */
@@ -909,14 +877,8 @@ body {
         min-height: 40px;
         max-height: 80px;
     }
-    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
-        width: 25px;
-        height: 25px;
-        font-size: 12px;
-    }
-    #uploadBtn i, #uploadBtn-right i {
-        font-size: 12px;
-    }
+ 
+   
     #sendBtn-right {
         background: #1E3A8A !important;
         /* background-image: url('/images/send-icon.png') !important; */
@@ -2111,6 +2073,7 @@ body {
            font-size: 10px;
        }
    }
+
 
 
 
