@@ -1542,7 +1542,7 @@ body {
     .image-preview {
         max-width: 150px;
     }
-    .input-area {
+.input-area {
     padding: 10px;
     gap: 8px;
 }
@@ -1572,19 +1572,18 @@ body {
     width: 35px;
     height: 35px;
     font-size: 16px;
-    background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* নীল গ্রেডিয়েন্ট ব্যাকগ্রাউন্ড */
+    background: #1E3A8A;
     color: #fff;
     border: none;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease, opacity 0.3s ease, background 0.3s ease;
+    transition: transform 0.2s ease, background 0.3s ease;
 }
 #sendBtn:hover, #sendBtnApplication:hover, #sendBtnQuestion:hover {
-    background: linear-gradient(135deg, #3B82F6, #1E3A8A); /* হোভারে রিভার্স গ্রেডিয়েন্ট */
+    background: #3B82F6;
     transform: scale(1.1);
-    opacity: 0.9;
 }
 #uploadBtn, #uploadBtnApplication, #uploadBtnQuestion {
     width: 35px;
@@ -1635,22 +1634,61 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease, opacity 0.3s ease, background 0.3s ease;
+    transition: transform 0.2s ease, background 0.3s ease;
 }
 #sendBtn-right {
-    background: linear-gradient(135deg, #1E3A8A, #3B82F6); /* ডান সেন্ড বাটনের জন্য হুবহু #sendBtn এর নীল গ্রেডিয়েন্ট */
+    background: #1E3A8A !important; /* ডান সেন্ড বাটনের জন্য #sendBtn এর মতো সলিড নীল কালার */
     color: #fff !important;
 }
 #sendBtn-right:hover {
-    background: linear-gradient(135deg, #3B82F6, #1E3A8A); /* হোভারে হুবহু #sendBtn এর রিভার্স গ্রেডিয়েন্ট */
+    background: #3B82F6 !important; /* হোভারে #sendBtn এর মতো নীল কালার */
     transform: scale(1.1) !important;
-    opacity: 0.9 !important;
 }
 #uploadBtn i, #uploadBtn-right i {
     font-size: 12px;
 }
 .preview-container, #previewContainer, #previewContainer-right {
     max-width: 40px;
+}
+
+@media (max-width: 480px) {
+    .input-area {
+        padding: 8px;
+    }
+    .input-wrapper {
+        width: 95%;
+        padding: 6px 10px;
+    }
+    #userInput, #userInput-right {
+        font-size: 12px;
+        min-height: 40px;
+        max-height: 80px;
+    }
+    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    #sendBtn {
+        background: #1E3A8A; /* মোবাইলে বাম সেন্ড বাটনের সলিড নীল কালার */
+    }
+    #sendBtn:hover {
+        background: #3B82F6;
+        transform: scale(1.1);
+    }
+    #sendBtn-right {
+        background: #1E3A8A !important; /* মোবাইলে ডান সেন্ড বাটনের জন্য হুবহু সলিড নীল কালার */
+    }
+    #sendBtn-right:hover {
+        background: #3B82F6 !important; /* হোভারে হুবহু নীল কালার */
+        transform: scale(1.1) !important;
+    }
+    #uploadBtn i, #uploadBtn-right i {
+        font-size: 12px;
+    }
+    .preview-container, #previewContainer, #previewContainer-right {
+        max-width: 40px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2288,4 +2326,5 @@ body {
            font-size: 10px;
        }
    }
+
 
