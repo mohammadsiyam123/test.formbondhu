@@ -1572,9 +1572,10 @@ body {
     width: 35px;
     height: 35px;
     font-size: 16px;
-    background: #1E3A8A;
-    color: #fff;
+    background: #1E3A8A !important;
+    color: #fff !important;
     border: none;
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -1582,8 +1583,8 @@ body {
     transition: transform 0.2s ease, background 0.3s ease;
 }
 #sendBtn:hover, #sendBtnApplication:hover, #sendBtnQuestion:hover {
-    background: #3B82F6;
-    transform: scale(1.1);
+    background: #3B82F6 !important;
+    transform: scale(1.1) !important;
 }
 #uploadBtn, #uploadBtnApplication, #uploadBtnQuestion {
     width: 35px;
@@ -1630,6 +1631,7 @@ body {
     height: 25px;
     font-size: 12px;
     border: none;
+    border-radius: 50%;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -1670,11 +1672,11 @@ body {
         font-size: 12px;
     }
     #sendBtn {
-        background: #1E3A8A; /* মোবাইলে বাম সেন্ড বাটনের সলিড নীল কালার */
+        background: #1E3A8A !important; /* মোবাইলে বাম সেন্ড বাটনের সলিড নীল কালার */
     }
     #sendBtn:hover {
-        background: #3B82F6;
-        transform: scale(1.1);
+        background: #3B82F6 !important;
+        transform: scale(1.1) !important;
     }
     #sendBtn-right {
         background: #1E3A8A !important; /* মোবাইলে ডান সেন্ড বাটনের জন্য হুবহু সলিড নীল কালার */
@@ -2284,6 +2286,7 @@ body {
            font-size: 10px;
        }
    }
+
 
 
 
