@@ -728,7 +728,7 @@ body {
     width: 80%;
     max-width: 800px;
     background: #fff;
-    border: 2px solid #1E3A8A; /* স্পষ্ট বর্ডার যাতে মেসেজ বক্স সংজ্ঞায়িত হয় */
+    border: 2px solid #1E3A8A;
     border-radius: 25px;
     padding: 10px 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -795,7 +795,7 @@ body {
 }
 
 #sendBtn-right:hover {
-    background: #3B82F6 !important; /* হোভারে নীল কালার এবং স্কেল */
+    background: #3B82F6 !important; /* হোভারে হালকা নীল এবং স্কেল */
     transform: scale(1.1) !important;
 }
 
@@ -867,7 +867,7 @@ body {
         font-size: 14px;
     }
     #sendBtn-right {
-        background: #1E3A8A !important; /* মোবাইলেও নীল কালার নিশ্চিত */
+        background: #1E3A8A !important;
     }
     #sendBtn-right:hover {
         background: #3B82F6 !important;
@@ -900,62 +900,11 @@ body {
         font-size: 12px;
     }
     #sendBtn-right {
-        background: #1E3A8A !important; /* মোবাইলেও নীল কালার নিশ্চিত */
+        background: #1E3A8A !important;
     }
     #sendBtn-right:hover {
         background: #3B82F6 !important;
         transform: scale(1.1) !important;
-    }
-    .preview-container, #previewContainer, #previewContainer-right {
-        max-width: 40px;
-    }
-}
-@media (max-width: 480px) {
-    .input-area {
-        padding: 8px;
-    }
-    .input-wrapper {
-        width: 95%;
-        padding: 6px 10px;
-    }
-    #userInput, #userInput-right {
-        font-size: 12px;
-        min-height: 40px;
-        max-height: 80px;
-    }
-    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
-        width: 25px;
-        height: 25px;
-        font-size: 12px;
-    }
-    #uploadBtn i, #uploadBtn-right i {
-        font-size: 12px;
-    }
-    .preview-container, #previewContainer, #previewContainer-right {
-        max-width: 40px;
-    }
-}
-
-@media (max-width: 480px) {
-    .input-area {
-        padding: 8px;
-    }
-    .input-wrapper {
-        width: 95%;
-        padding: 6px 10px;
-    }
-    #userInput, #userInput-right {
-        font-size: 12px;
-        min-height: 40px;
-        max-height: 80px;
-    }
-    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
-        width: 25px;
-        height: 25px;
-        font-size: 12px;
-    }
-    #uploadBtn i, #uploadBtn-right i {
-        font-size: 12px;
     }
     .preview-container, #previewContainer, #previewContainer-right {
         max-width: 40px;
@@ -2136,4 +2085,5 @@ body {
            font-size: 10px;
        }
    }
+
 
