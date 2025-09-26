@@ -858,24 +858,27 @@ body {
         min-height: 50px;
         max-height: 100px;
     }
-    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
-        width: 30px;
-        height: 30px;
-        font-size: 14px;
-    }
-    #uploadBtn i, #uploadBtn-right i {
-        font-size: 14px;
-    }
-    #sendBtn-right {
-        background: #1E3A8A !important;
-    }
-    #sendBtn-right:hover {
-        background: #3B82F6 !important;
-        transform: scale(1.1) !important;
-    }
-    .preview-container, #previewContainer, #previewContainer-right {
-        max-width: 50px;
-    }
+  /* ডান পাশের সেন্ড বাটন */
+#sendBtn-right {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #1E3A8A;  /* গাঢ় নীল */
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease; /* smooth hover effect */
+}
+
+/* হোভার ইফেক্ট */
+#sendBtn-right:hover {
+    background-color: #3B82F6; /* হালকা নীল */
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 @media (max-width: 480px) {
@@ -2085,5 +2088,6 @@ body {
            font-size: 10px;
        }
    }
+
 
 
