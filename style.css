@@ -772,34 +772,7 @@ body {
     color: #fff;
     font-size: 16px;
 }
-
-#sendBtn-right {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: #1E3A8A !important;
-    color: #fff !important;
-    font-size: 16px;
-    /* ব্যাকগ্রাউন্ড ইমেজ যোগ করতে চাইলে নিচের লাইনগুলোর কমেন্ট সরান */
 }
-
-#sendBtn:hover {
-    background: #3B82F6;
-    transform: scale(1.1);
-}
-
-#sendBtn-right:hover {
-    background: #3B82F6 !important;
-    transform: scale(1.1) !important;
-    /* background-image: url('/images/send-icon-hover.png') !important; */
-}
-
-#sendBtn-right:active {
-    background: #3B82F6 !important;
-    transform: scale(1.1) !important;
-}
-
-
 .button-container {
     display: flex;
     gap: 5px;
@@ -2073,6 +2046,7 @@ body {
            font-size: 10px;
        }
    }
+
 
 
 
