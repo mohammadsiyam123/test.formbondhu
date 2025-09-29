@@ -728,7 +728,7 @@ body {
     width: 80%;
     max-width: 800px;
     background: #fff;
-    border: 2px solid #1E3A8A;
+    border: 2px solid #1E3A8A; /* স্পষ্ট বর্ডার যাতে মেসেজ বক্স সংজ্ঞায়িত হয় */
     border-radius: 25px;
     padding: 10px 15px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -762,7 +762,14 @@ body {
     outline: none;
 }
 
-
+#sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
 
 #sendBtn {
     width: 35px;
@@ -772,7 +779,47 @@ body {
     color: #fff;
     font-size: 16px;
 }
+
+#sendBtn-right {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #1E3A8A !important; /* নীল ব্যাকগ্রাউন্ড নিশ্চিত করা */
+    color: #fff !important;
+    font-size: 16px;
 }
+
+#sendBtn:hover {
+    background: #3B82F6;
+    transform: scale(1.1);
+}
+
+#sendBtn-right:hover {
+    background: #3B82F6 !important; /* হোভারে নীল কালার এবং স্কেল */
+    transform: scale(1.1) !important;
+}
+
+#uploadBtn, #uploadBtn-right {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #1E3A8A;
+    color: #fff;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+}
+
+#uploadBtn i, #uploadBtn-right i {
+    font-size: 16px;
+}
+
+#uploadBtn:hover, #uploadBtn-right:hover {
+    background: #3B82F6;
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
 .button-container {
     display: flex;
     gap: 5px;
@@ -816,19 +863,13 @@ body {
         height: 30px;
         font-size: 14px;
     }
-  
+    #uploadBtn i, #uploadBtn-right i {
+        font-size: 14px;
+    }
     #sendBtn-right {
-        background: #1E3A8A !important;
-        /* background-image: url('/images/send-icon.png') !important; */
-        /* background-size: cover; */
-        /* background-position: center; */
+        background: #1E3A8A !important; /* মোবাইলেও নীল কালার নিশ্চিত */
     }
     #sendBtn-right:hover {
-        background: #3B82F6 !important;
-        transform: scale(1.1) !important;
-        /* background-image: url('/images/send-icon-hover.png') !important; */
-    }
-    #sendBtn-right:active {
         background: #3B82F6 !important;
         transform: scale(1.1) !important;
     }
@@ -850,22 +891,71 @@ body {
         min-height: 40px;
         max-height: 80px;
     }
- 
-   
+    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    #uploadBtn i, #uploadBtn-right i {
+        font-size: 12px;
+    }
     #sendBtn-right {
-        background: #1E3A8A !important;
-        /* background-image: url('/images/send-icon.png') !important; */
-        /* background-size: cover; */
-        /* background-position: center; */
+        background: #1E3A8A !important; /* মোবাইলেও নীল কালার নিশ্চিত */
     }
     #sendBtn-right:hover {
         background: #3B82F6 !important;
         transform: scale(1.1) !important;
-        /* background-image: url('/images/send-icon-hover.png') !important; */
     }
-    #sendBtn-right:active {
-        background: #3B82F6 !important;
-        transform: scale(1.1) !important;
+    .preview-container, #previewContainer, #previewContainer-right {
+        max-width: 40px;
+    }
+}
+@media (max-width: 480px) {
+    .input-area {
+        padding: 8px;
+    }
+    .input-wrapper {
+        width: 95%;
+        padding: 6px 10px;
+    }
+    #userInput, #userInput-right {
+        font-size: 12px;
+        min-height: 40px;
+        max-height: 80px;
+    }
+    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    #uploadBtn i, #uploadBtn-right i {
+        font-size: 12px;
+    }
+    .preview-container, #previewContainer, #previewContainer-right {
+        max-width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-area {
+        padding: 8px;
+    }
+    .input-wrapper {
+        width: 95%;
+        padding: 6px 10px;
+    }
+    #userInput, #userInput-right {
+        font-size: 12px;
+        min-height: 40px;
+        max-height: 80px;
+    }
+    #sendBtn, #sendBtn-right, #uploadBtn, #uploadBtn-right {
+        width: 25px;
+        height: 25px;
+        font-size: 12px;
+    }
+    #uploadBtn i, #uploadBtn-right i {
+        font-size: 12px;
     }
     .preview-container, #previewContainer, #previewContainer-right {
         max-width: 40px;
@@ -2046,8 +2136,4 @@ body {
            font-size: 10px;
        }
    }
-
-
-
-
 
