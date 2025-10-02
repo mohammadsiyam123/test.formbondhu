@@ -18,14 +18,21 @@
 <body>
     <div class="chat-container">
         <div class="header">
-    <div class="header-brand">
-        <span class="brand-logo">ফর্মবন্ধু</span>
-        <input type="text" class="dynamic-text" id="dynamicText" readonly>
-    </div>
-    <div class="header-right-icons">
-        <!-- Other icons if any -->
-    </div>
-</div>
+            <div class="header-icons">
+                <i class="fas fa-home home-icon" title="Home" onclick="window.location.href='index.html'"></i>
+                <i class="fas fa-bars history-icon" id="historyIcon" title="Chat History"></i>
+                <i class="fas fa-pen-to-square new-chat-icon" id="newChatIcon" title="New Chat"></i>
+            </div>
+            <div class="header-brand">
+                <span class="brand-logo">ফর্মবন্ধু</span>
+                <span class="dynamic-text"></span>
+            </div>
+            <div class="header-right-icons">
+                <i class="fas fa-video video-icon" id="videoIcon" title="টিউটোরিয়াল ভিডিও"></i>
+                <i class="fas fa-cog settings-icon" id="settingsIcon" title="সেটিংস" onclick="window.location.href='settings.html'"></i>
+                <i class="fas fa-user-cog account-icon" title="অ্যাকাউন্ট সেটিংস" onclick="window.location.href='account.html'"></i>
+            </div>
+        </div>
         <div class="sub-header">
             <div class="sub-header-left">আবেদন</div>
             <div class="sub-header-right">প্রশ্ন জিজ্ঞাসা</div>
@@ -50,7 +57,7 @@
                             <img id="previewImage" class="preview-image" src="" alt="Image Preview">
                         </div>
                         <textarea id="userInput" placeholder="আপনার বার্তা লিখুন..."></textarea>
-                        <input type="file" id="fileInput" style="display: none;" accept="image/png, image/jpeg">
+                        <input type="file" id="fileInput" style="display: none;" accept="image/png, image/jpeg, image/jpg">
                         <div class="button-container">
                             <button id="uploadBtn" title="Upload Image"><i class="fas fa-paperclip"></i></button>
                             <button id="sendBtn" title="Send Message"><i class="fas fa-arrow-up"></i></button>
@@ -78,10 +85,10 @@
                             <img id="previewImage-right" class="preview-image" src="" alt="Image Preview">
                         </div>
                         <textarea id="userInput-right" placeholder="আপনার প্রশ্ন লিখুন..."></textarea>
-                        <input type="file" id="fileInput-right" style="display: none;" accept="image/png, image/jpeg">
-                        <div class="button-container
-                            <button id="sendBtn-right" title="Send Message"><i class="fas fa-arrow-up"></i></button>
-                        </div>
+                        <input type="file" id="fileInput-right" style="display: none;" accept="image/png, image/jpeg, image/jpg">
+                        <div class="button-container">
+                       <button id="sendBtn-right" title="Send Message"><i class="fas fa-arrow-up"></i></button>
+                      </div>
                     </div>
                 </div>
             </div>
@@ -200,4 +207,3 @@
     <script src="chat.js"></script>
 </body>
 </html>
-
