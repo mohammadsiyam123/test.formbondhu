@@ -284,18 +284,6 @@ function sanitizeMessage(message) {
     return div.innerHTML;
 }
 
-// নতুন ফাংশন: HTML অ্যালাউ করে স্যানিটাইজ (ইমেজ ট্যাগের জন্য)
-function sanitizeMessageAllowHTML(text) {
-    let sanitized = text
-        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')  // স্ক্রিপ্ট রিমুভ
-        .replace(/on\w+="[^"]*"/gi, '')  // ইভেন্ট হ্যান্ডলার রিমুভ
-        .replace(/javascript:/gi, '')  // JS লিঙ্ক রিমুভ
-        // নতুন: <img> ট্যাগ অ্যালাউ, অন্যান্য এস্কেপ
-        .replace(/<(?!img\s|br\s|\/img>)/gi, '&lt;');  // শুধু img/br অ্যালাউ
-
-    return sanitized;
-}
-
 function displayMessage(message, sender, side) {
     const messagesContainer = side === 'left' ? elements.messagesDiv : elements.messagesRight;
     if (!messagesContainer) {
@@ -304,18 +292,16 @@ function displayMessage(message, sender, side) {
     }
     const messageDiv = document.createElement('div');
     messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message', 'slide-in');
-
-    // নতুন: সর্বদা HTML রেন্ডার (if-else রিমুভ, fullMessage HTML হিসেবে ট্রিট)
-    const sanitizedMessage = sanitizeMessageAllowHTML(message);  // নতুন স্যানিটাইজার (তৃতীয় ধাপে যোগ করুন)
-    messageDiv.innerHTML = sanitizedMessage;  // innerHTML দিয়ে রেন্ডার (ফুল ইমেজ দেখাবে, URL টেক্সট না)
-
-    messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-
-    // টাইপিং ইন্ডিকেটর রিমুভ (যদি থাকে)
-    const typingIndicator = messagesContainer.querySelector('.typing-indicator');
-    if (typingIndicator) typingIndicator.remove();
-}
+    if (typeof message === 'string' && (message.startsWith('http') || message.startsWith('data:image'))) {
+        const img = document.createElement('img');
+        img.src = message;
+        img.classList.add('chat-image');
+        img.alt = 'Uploaded Image';
+        img.addEventListener('click', () => openImageModal(message));
+        messageDiv.appendChild(img);
+    } else {
+        messageDiv.innerHTML = sanitizeMessage(message);
+    }
     if (side === 'right') {
         messageDiv.style.margin = '10px 0';
         messageDiv.style.padding = '10px';
@@ -817,21 +803,25 @@ async function renameChat() {
 }
 
 // Send Message Function
-if (selectedFile) {
-    imageDataURL = await getImageDataURL(selectedFile, side);  // ধাপ 1-এর ফাংশন কল
-    if (imageDataURL) {
-        // নতুন: clearPreview না থাকলে ইনলাইন ক্লিয়ার
-        const previewCont = side === 'left' ? elements.previewContainer : elements.previewContainerRight;
-        if (previewCont) previewCont.style.display = 'none';
-        selectedFile = null;  // ফাইল ক্লিয়ার
+async function sendMessage(side) {
+    const userInput = side === 'left' ? elements.userInput : elements.userInputRight;
+    let imageDataURL = null;
+    
+    // ইমেজ চেক এবং প্রসেসিং (আপনার যোগ করা অংশ রাখা হয়েছে)
+    if (selectedFile) {
+        imageDataURL = await getImageDataURL(selectedFile, side);  // ধাপ 1-এর ফাংশন কল
+        if (imageDataURL) {
+            // clearPreview ফাংশন যদি না থাকে, তাহলে এই লাইন ব্যবহার করুন:
+            const previewContainer = side === 'left' ? elements.previewContainer : elements.previewContainerRight;
+            if (previewContainer) previewContainer.style.display = 'none';  // প্রিভিউ লুকানো
+            selectedFile = null;  // ফাইল ক্লিয়ার
+        }
     }
-}
-const message = userInput.value.trim();
-if (!message && !imageDataURL) return;
-
-// নতুন: টেক্সট + ইমেজ মিলিয়ে fullMessage তৈরি
-const fullMessage = (message ? sanitizeMessageAllowHTML(message) : '') + 
-                    (imageDataURL ? `<br><img src="${imageDataURL}" alt="আপলোড করা ইমেজ" style="max-width: 100%; border-radius: 8px;">` : '');
+    
+    const message = userInput.value.trim();
+    
+    // আপডেট: টেক্সট না থাকলেও ইমেজ থাকলে সেন্ড হবে
+    if (!message && !imageDataURL) return;
     
     // নতুন: টেক্সট + ইমেজ মিলিয়ে fullMessage তৈরি
     const fullMessage = (message ? sanitizeMessage(message) : '') + 
@@ -1225,8 +1215,6 @@ elements.fileInput?.addEventListener('change', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
-
-
 
 
 
