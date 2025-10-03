@@ -292,16 +292,18 @@ function displayMessage(message, sender, side) {
     }
     const messageDiv = document.createElement('div');
     messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message', 'slide-in');
-    if (typeof message === 'string' && (message.startsWith('http') || message.startsWith('data:image'))) {
-        const img = document.createElement('img');
-        img.src = message;
-        img.classList.add('chat-image');
-        img.alt = 'Uploaded Image';
-        img.addEventListener('click', () => openImageModal(message));
-        messageDiv.appendChild(img);
-    } else {
-        messageDiv.innerHTML = sanitizeMessage(message);
-    }
+
+    // নতুন: সর্বদা HTML রেন্ডার (if-else রিমুভ, fullMessage HTML হিসেবে ট্রিট)
+    const sanitizedMessage = sanitizeMessageAllowHTML(message);  // নতুন স্যানিটাইজার (তৃতীয় ধাপে যোগ করুন)
+    messageDiv.innerHTML = sanitizedMessage;  // innerHTML দিয়ে রেন্ডার (ফুল ইমেজ দেখাবে, URL টেক্সট না)
+
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // টাইপিং ইন্ডিকেটর রিমুভ (যদি থাকে)
+    const typingIndicator = messagesContainer.querySelector('.typing-indicator');
+    if (typingIndicator) typingIndicator.remove();
+}
     if (side === 'right') {
         messageDiv.style.margin = '10px 0';
         messageDiv.style.padding = '10px';
