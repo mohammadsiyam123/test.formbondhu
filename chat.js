@@ -997,20 +997,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Enter' && !e.repeat) sendMessage('right');
     });
     elements.uploadBtn?.addEventListener('click', () => elements.fileInput?.click());
-    elements.fileInput?.addEventListener('change', () => {
-        const file = elements.fileInput.files[0];
-        if (file) {
-            selectedFile = file;
-            const reader = new FileReader();
-            reader.onload = e => {
-                if (elements.previewImage) elements.previewImage.src = e.target.result;
-                if (elements.previewContainer) elements.previewContainer.style.display = 'block';
-            };
-            reader.onerror = () => showErrorMessage('ইমেজ লোডে সমস্যা।', 'left');
-            reader.readAsDataURL(file);
-        }
-        elements.fileInput.value = '';
-    });
+elements.fileInput?.addEventListener('change', () => {
+    const file = elements.fileInput.files[0];
+    if (file) {
+        selectedFile = file;  // গ্লোবালে সেভ (পরে সেন্ডে ব্যবহার)
+        const reader = new FileReader();
+        reader.onload = e => {
+            elements.previewImage.src = e.target.result;  // প্রিভিউ দেখানো
+            elements.previewContainer.style.display = 'block';
+        };
+        reader.onerror = () => showErrorMessage('ইমেজ লোডে সমস্যা।', 'left');
+        reader.readAsDataURL(file);
+    }
+    elements.fileInput.value = '';  // ফাইল ক্লিয়ার
+});
     elements.uploadBtnRight?.addEventListener('click', () => elements.fileInputRight?.click());
     elements.fileInputRight?.addEventListener('change', () => {
         const file = elements.fileInputRight.files[0];
@@ -1186,4 +1186,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
+
 
