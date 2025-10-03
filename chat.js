@@ -1116,4 +1116,55 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Resizable Divider Functionality (Only for Main Chat Columns Divider)
+    const mainDivider = document.getElementById('mainDivider');
+    const leftColumn = document.querySelector('.left-column');
+    const rightColumn = document.querySelector('.right-column');
+
+    let isDragging = false;
+
+    // Function to start dragging main divider
+    function startDrag(e) {
+      isDragging = true;
+      if (mainDivider) {
+        mainDivider.classList.add('dragging');
+      }
+      document.body.style.userSelect = 'none'; // Prevent text selection during drag
+      e.preventDefault(); // Prevent default touch behavior
+    }
+
+    // Function to stop dragging main divider
+    function stopDrag() {
+      isDragging = false;
+      if (mainDivider) {
+        mainDivider.classList.remove('dragging');
+      }
+      document.body.style.userSelect = ''; // Re-enable text selection
+    }
+
+    // Function to handle dragging (resize chat columns)
+    function handleDrag(e) {
+      if (!isDragging || !leftColumn || !rightColumn) return;
+      
+      const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+      const containerRect = document.querySelector('.split-chat').getBoundingClientRect();
+      const newLeftWidth = ((clientX - containerRect.left) / containerRect.width) * 100;
+      const newRightWidth = 100 - newLeftWidth;
+
+      // Apply flex basis with min/max constraints (20% to 80%)
+      leftColumn.style.flex = `0 0 ${Math.max(20, Math.min(80, newLeftWidth))}%`;
+      rightColumn.style.flex = `0 0 ${Math.max(20, Math.min(80, newRightWidth))}%`;
+    }
+
+    // Add event listeners for main divider (mouse and touch support)
+    if (mainDivider) {
+      mainDivider.addEventListener('mousedown', startDrag);
+      mainDivider.addEventListener('touchstart', startDrag, { passive: false });
+    }
+
+    document.addEventListener('mouseup', stopDrag);
+    document.addEventListener('touchend', stopDrag);
+    document.addEventListener('mousemove', handleDrag);
+    document.addEventListener('touchmove', handleDrag, { passive: false });
 });
