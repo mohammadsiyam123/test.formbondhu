@@ -675,7 +675,25 @@ async function saveChatHistory(message, sender, side) {
         showErrorMessage('চ্যাট হিস্ট্রি সেভ করতে সমস্যা: ' + error.message, side);
     }
 }
+// নতুন ফাংশন: ইমেজকে Base64-এ কনভার্ট (চ্যাটে দেখানোর জন্য)
+function getImageDataURL(file, side) {
+    if (!file) return null;
 
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const dataURL = e.target.result;  // Base64 URL তৈরি
+            console.log('ইমেজ আপলোড প্রসেস সম্পূর্ণ');  // টেস্টের জন্য
+            resolve(dataURL);
+        };
+        reader.onerror = () => {
+            console.error('ইমেজ রিড এরর');
+            showErrorMessage('ইমেজ লোডে সমস্যা', side);
+            resolve(null);
+        };
+        reader.readAsDataURL(file);  // ফাইলকে base64-এ পরিণত
+    });
+}
 async function loadChatMessages(chatId, side) {
     const messagesContainer = side === 'left' ? elements.messagesDiv : elements.messagesRight;
     if (!messagesContainer) return;
@@ -1168,3 +1186,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
+
