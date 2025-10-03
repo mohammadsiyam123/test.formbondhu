@@ -803,25 +803,21 @@ async function renameChat() {
 }
 
 // Send Message Function
-async function sendMessage(side) {
-    const userInput = side === 'left' ? elements.userInput : elements.userInputRight;
-    let imageDataURL = null;
-    
-    // ইমেজ চেক এবং প্রসেসিং (আপনার যোগ করা অংশ রাখা হয়েছে)
-    if (selectedFile) {
-        imageDataURL = await getImageDataURL(selectedFile, side);  // ধাপ 1-এর ফাংশন কল
-        if (imageDataURL) {
-            // clearPreview ফাংশন যদি না থাকে, তাহলে এই লাইন ব্যবহার করুন:
-            const previewContainer = side === 'left' ? elements.previewContainer : elements.previewContainerRight;
-            if (previewContainer) previewContainer.style.display = 'none';  // প্রিভিউ লুকানো
-            selectedFile = null;  // ফাইল ক্লিয়ার
-        }
+if (selectedFile) {
+    imageDataURL = await getImageDataURL(selectedFile, side);  // ধাপ 1-এর ফাংশন কল
+    if (imageDataURL) {
+        // নতুন: clearPreview না থাকলে ইনলাইন ক্লিয়ার
+        const previewCont = side === 'left' ? elements.previewContainer : elements.previewContainerRight;
+        if (previewCont) previewCont.style.display = 'none';
+        selectedFile = null;  // ফাইল ক্লিয়ার
     }
-    
-    const message = userInput.value.trim();
-    
-    // আপডেট: টেক্সট না থাকলেও ইমেজ থাকলে সেন্ড হবে
-    if (!message && !imageDataURL) return;
+}
+const message = userInput.value.trim();
+if (!message && !imageDataURL) return;
+
+// নতুন: টেক্সট + ইমেজ মিলিয়ে fullMessage তৈরি
+const fullMessage = (message ? sanitizeMessageAllowHTML(message) : '') + 
+                    (imageDataURL ? `<br><img src="${imageDataURL}" alt="আপলোড করা ইমেজ" style="max-width: 100%; border-radius: 8px;">` : '');
     
     // নতুন: টেক্সট + ইমেজ মিলিয়ে fullMessage তৈরি
     const fullMessage = (message ? sanitizeMessage(message) : '') + 
@@ -1215,6 +1211,7 @@ elements.fileInput?.addEventListener('change', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
+
 
 
 
