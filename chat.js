@@ -284,6 +284,18 @@ function sanitizeMessage(message) {
     return div.innerHTML;
 }
 
+// নতুন ফাংশন: HTML অ্যালাউ করে স্যানিটাইজ (ইমেজ ট্যাগের জন্য)
+function sanitizeMessageAllowHTML(text) {
+    let sanitized = text
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')  // স্ক্রিপ্ট রিমুভ
+        .replace(/on\w+="[^"]*"/gi, '')  // ইভেন্ট হ্যান্ডলার রিমুভ
+        .replace(/javascript:/gi, '')  // JS লিঙ্ক রিমুভ
+        // নতুন: <img> ট্যাগ অ্যালাউ, অন্যান্য এস্কেপ
+        .replace(/<(?!img\s|br\s|\/img>)/gi, '&lt;');  // শুধু img/br অ্যালাউ
+
+    return sanitized;
+}
+
 function displayMessage(message, sender, side) {
     const messagesContainer = side === 'left' ? elements.messagesDiv : elements.messagesRight;
     if (!messagesContainer) {
@@ -1213,6 +1225,7 @@ elements.fileInput?.addEventListener('change', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
+
 
 
 
