@@ -1591,6 +1591,23 @@ body {
            font-size: 12px;
        }
    }
+/* নতুন: চ্যাটে ইমেজ স্টাইল (ফুল ইমেজ দেখানোর জন্য) */
+.chat-messages img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 5px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  /* ছোট শ্যাডো যোগ */
+    display: block;  /* ইমেজকে ব্লক করে সেন্টার করা */
+}
+
+/* মোবাইলের জন্য */
+@media (max-width: 768px) {
+    .chat-messages img {
+        max-width: 90%;
+        margin: 10px auto;
+    }
+}
    @media (max-width: 480px) {
        .video-icon {
            font-size: 18px;
@@ -1605,3 +1622,4 @@ body {
            font-size: 10px;
        }
    }
+
