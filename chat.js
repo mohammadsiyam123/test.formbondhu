@@ -805,12 +805,41 @@ async function renameChat() {
 // Send Message Function
 async function sendMessage(side) {
     const userInput = side === 'left' ? elements.userInput : elements.userInputRight;
+    let imageDataURL = null;
+    
+    // ইমেজ চেক এবং প্রসেসিং (আপনার যোগ করা অংশ রাখা হয়েছে)
+    if (selectedFile) {
+        imageDataURL = await getImageDataURL(selectedFile, side);  // ধাপ 1-এর ফাংশন কল
+        if (imageDataURL) {
+            // clearPreview ফাংশন যদি না থাকে, তাহলে এই লাইন ব্যবহার করুন:
+            const previewContainer = side === 'left' ? elements.previewContainer : elements.previewContainerRight;
+            if (previewContainer) previewContainer.style.display = 'none';  // প্রিভিউ লুকানো
+            selectedFile = null;  // ফাইল ক্লিয়ার
+        }
+    }
+    
     const message = userInput.value.trim();
-    if (!message) return;
-    displayMessage(message, 'user', side);
-    saveChatHistory(message, 'user', side);
+    
+    // আপডেট: টেক্সট না থাকলেও ইমেজ থাকলে সেন্ড হবে
+    if (!message && !imageDataURL) return;
+    
+    // নতুন: টেক্সট + ইমেজ মিলিয়ে fullMessage তৈরি
+    const fullMessage = (message ? sanitizeMessage(message) : '') + 
+                        (imageDataURL ? `<br><img src="${imageDataURL}" alt="আপলোড করা ইমেজ" style="max-width: 100%; border-radius: 8px;">` : '');
+    
+    // চ্যাটে দেখানো (fullMessage দিয়ে)
+    displayMessage(fullMessage, 'user', side);
+    
+    // হিস্ট্রিতে সেভ (fullMessage দিয়ে)
+    saveChatHistory(fullMessage, 'user', side);
+    
+    // ইনপুট ক্লিয়ার
     userInput.value = '';
+    
+    // ওয়েলকাম মেসেজ লুকানো
     hideWelcomeMessage(side);
+    
+    // API কল (শুধু টেক্সট দিয়ে, ইমেজ যোগ করা হয়নি)
     if (side === 'left') {
         callRasaAPI(message, {}, side);
     } else {
@@ -1186,5 +1215,6 @@ elements.fileInput?.addEventListener('change', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
+
 
 
