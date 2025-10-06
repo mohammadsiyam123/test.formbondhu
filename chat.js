@@ -292,16 +292,22 @@ function displayMessage(message, sender, side) {
     }
     const messageDiv = document.createElement('div');
     messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message', 'slide-in');
-    if (typeof message === 'string' && (message.startsWith('http') || message.startsWith('data:image'))) {
-        const img = document.createElement('img');
-        img.src = message;
-        img.classList.add('chat-image');
-        img.alt = 'Uploaded Image';
-        img.addEventListener('click', () => openImageModal(message));
-        messageDiv.appendChild(img);
-    } else {
-        messageDiv.innerHTML = sanitizeMessage(message);
-    }
+ if (typeof message === 'string' && (message.startsWith('http') || message.startsWith('data:image'))) {
+    // পুরাতন URL-ভিত্তিক ইমেজ হ্যান্ডেল (যাতে বটের মেসেজ কাজ করে)
+    const img = document.createElement('img');
+    img.src = message;
+    img.classList.add('chat-image');
+    img.alt = 'Uploaded Image';
+    img.addEventListener('click', () => openImageModal(message));
+    messageDiv.appendChild(img);
+} else if (typeof message === 'string' && message.includes('<img')) {
+    // নতুন: যদি মেসেজে <img> ট্যাগ থাকে (যেমন fullMessage থেকে), তাহলে সরাসরি HTML রেন্ডার করো
+    // এতে ইমেজ চ্যাটে ইমেজ হিসেবে দেখা যাবে, URL না
+    messageDiv.innerHTML = message;  // sanitizeMessage ব্যবহার না করো, কারণ এটি নিজের তৈরি নিরাপদ HTML
+} else {
+    // অন্যান্য প্লেইন টেক্সটের জন্য sanitize রাখো
+    messageDiv.innerHTML = sanitizeMessage(message);
+}
     if (side === 'right') {
         messageDiv.style.margin = '10px 0';
         messageDiv.style.padding = '10px';
@@ -1215,6 +1221,7 @@ elements.fileInput?.addEventListener('change', () => {
     document.addEventListener('mousemove', handleDrag);
     document.addEventListener('touchmove', handleDrag, { passive: false });
 });
+
 
 
 
